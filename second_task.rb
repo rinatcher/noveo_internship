@@ -8,7 +8,7 @@ puts bitwise_or(4)
 
 # Вторая задача
 def clear_str(str)
-  (0..str.length).each {str.sub!(/\w#/) { "" }}
+  str.each_char { str.sub!(/\w#/, '') }
   str.gsub!("#","")
   str
 end
