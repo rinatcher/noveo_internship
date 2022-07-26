@@ -34,33 +34,36 @@ class Vector
     if @vector.size != other.size
       nil
     else
-      (0...@vector.length).map{ |i| @vector[i] + other[i] }
+      res = (0...@vector.length).map{ |i| @vector[i] + other[i] }
     end
+    Vector.new(res)
   end
 
   def subtract(other)
     if @vector.size != other.size
       nil
     else
-      (0...@vector.length).map{ |i| @vector[i] - other[i] }
+      res = (0...@vector.length).map{ |i| @vector[i] - other[i] }
     end
+    Vector.new(res)
   end
 
   def dot(other)
     if @vector.size != other.size
       nil
     else
-      (0...@vector.length).map{ |i| @vector[i] * other[i] }.sum
+      res = (0...@vector.length).map{ |i| @vector[i] * other[i] }.sum
     end
+    Vector.new(res)
   end
 
   def norm
     Math.sqrt(@vector.map{ |num| num ** 2}.sum)
   end
 
-  def to_s()
-    "(#{@vector})".gsub(/"|\[|\]/,'')
-  end
+  # def to_s()
+  #   "(#{@vector})".gsub(/"|\[|\]/,'')
+  # end
 
   def vector
     @vector
@@ -77,4 +80,3 @@ p a.dot(c)      # throws an nil
 p a.norm        # should return sqrt(1^2 + 2^2 + 3^2) = sqrt(14)
 p a.add(c)      # throws an nil
 p a.subtract(c) # throws an nil
-p a.to_s        # (1, 2, 3)
