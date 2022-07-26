@@ -10,28 +10,18 @@
 
 
 class HashWithIndifferentAccess < Hash
-  def initialize(h)
-    h.each { |k, v| self[key_to_s(k)] = v }
-  end
-
   def [](key)
-    super(key_to_s(key))
-  end
-
-  def []=(key, val)
-    self.store(key_to_s(key), val)
-  end
-
-  private
-  def key_to_s(key)
-    key.is_a?(Symbol) ? key.to_s : key
+    return super(key) if include?(key)
+    case key
+    when Symbol then return super(key.to_s) if include?(key.to_s)
+    when String then return super(key.to_sym) if include?(key.to_sym)
+    end
   end
 end
-
 class Hash
   def with_indifferent_access
     #: return HashWithIndifferentAccess
-    HashWithIndifferentAccess.new(self)
+    HashWithIndifferentAccess[self]
   end
 end
 
@@ -40,4 +30,5 @@ hash[:foo] = 'bar'
 
 p hash[:a] # => apple
 p hash['foo']  # => bar
+p hash[:foo]
 p hash
