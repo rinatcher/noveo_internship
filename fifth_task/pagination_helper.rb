@@ -5,7 +5,8 @@ class PaginationHelper
   end
 
   def page_count
-    paginate(@page).length
+    return @arr.length / @page + 1 if @arr.length % @page != 0
+    @arr.length / @page
   end
 
   def item_count
@@ -13,9 +14,15 @@ class PaginationHelper
   end
 
   def page_item_count(index)
-    begin
-    paginate(@page)[index].length
-    rescue Exception
+    if @arr.length % @page == 0
+      return @page
+    end
+    case index
+    when 0...page_count - 1
+      return @page
+    when page_count - 1
+      return @arr.length % @page
+    else
       -1
     end
   end
@@ -23,10 +30,5 @@ class PaginationHelper
   def page_index(index)
     return -1 if index >= @arr.length || index < 0
     index / @page
-  end
-
-  private
-  def paginate(page)
-    @arr.each_slice(page).to_a
   end
 end
