@@ -5,9 +5,10 @@ class LinkedList
     @head = nil
   end
 
+  private
   def find_before(value)
     node = @head
-    return false unless node.next
+    return nil unless node.next
     return node if node.next.value == value
     while (node = node.next)
       return node if node.next && node.next.value == value
@@ -20,6 +21,7 @@ class LinkedList
     return node unless node.next while (node = node.next)
   end
 
+  public
   def append(value)
     if @head
       find_tail.next = Node.new(value)
