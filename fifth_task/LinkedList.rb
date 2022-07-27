@@ -5,23 +5,6 @@ class LinkedList
     @head = nil
   end
 
-  private
-  def find_before(value)
-    node = @head
-    return nil unless node.next
-    return node if node.next.value == value
-    while (node = node.next)
-      return node if node.next && node.next.value == value
-    end
-  end
-
-  def find_tail
-    node = @head
-    return node unless node.next
-    return node unless node.next while (node = node.next)
-  end
-
-  public
   def append(value)
     if @head
       find_tail.next = Node.new(value)
@@ -65,5 +48,21 @@ class LinkedList
     end
     result.append(current.value)
     "(#{result.to_s})".gsub(/"|\[|\]/,'')
+  end
+  
+  private
+  def find_before(value)
+    node = @head
+    return nil unless node.next
+    return node if node.next.value == value
+    while (node = node.next)
+      return node if node.next && node.next.value == value
+    end
+  end
+
+  def find_tail
+    node = @head
+    return node unless node.next
+    return node unless node.next while (node = node.next)
   end
 end
