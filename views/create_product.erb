@@ -1,0 +1,41 @@
+<html>
+<head>
+  <style>
+    p, h1, h2, h3, h4, ul, li, a, form {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #5e15a6;
+      text-align: center;
+    }
+    label, .submit_button {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: bold;
+    }
+
+    input {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: rgb(21, 40, 166);
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+<form action="/products" method="POST" role="form">
+  <h2>Create new product</h2>
+  <label for="name">Name:</label>
+  <br>
+  <input type="text" id="name" name="product[name]" required>
+  <br>
+  <label for="count">Count:</label><br>
+  <input type="text" id="count" name="product[count]" required>
+  <br>
+  <label for="price">Price:</label><br>
+  <input type="text" id="price" name="product[price]" required>
+  <br>
+  <label for="creator">Creator:</label><br>
+  <input type="text" id="creator" name="product[creator]" required>
+  <br>
+  <br/>
+  <input type="submit" value="Create Product" class="submit_button">
+</form>
+</body>
+</html>

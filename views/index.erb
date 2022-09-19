@@ -1,0 +1,67 @@
+<head>
+  <style>
+      p, h1, h2, h3, h4, ul, li, a, label,form {
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+          color: #5e15a6;
+          text-align: center;
+      }
+      .table {
+          width: 70%;
+          margin-bottom: 20px;
+          border: 1px solid #dddddd;
+          border-collapse: collapse;
+      }
+      .table th {
+          font-weight: bold;
+          padding: 5px;
+          background: #efefef;
+          border: 1px solid #dddddd;
+      }
+      .table td {
+          border: 1px solid #dddddd;
+          padding: 5px;
+      }
+      input{
+          margin-bottom:5px;
+      }
+
+  </style>
+</head>
+<body>
+<h1>Products list</h1>
+<h3><a href='/products/create'>Create a new product</a></h3>
+<table class="table" align="center" border="1">
+  <tr>
+    <th>Name</th>
+    <th>Count</th>
+    <th>Price</th>
+    <th>Creator</th>
+  </tr>
+  <% @data.each do |product| product %>
+    <tr><% product.split(', ').drop(1).each do |value| %>
+        <td><%= value %> </td>
+      <% end %>
+      <td align="center" >
+      <form action='/products/<%=product[0]%>' method='POST'>
+        <input type='hidden' name='_method' value='PATCH'>
+        <br>
+        <input type="text" id="name" name="product[name]" value="<%= product.split(', ')[1] %>">
+        <br>
+        <input type="text" id="count" name="product[count]" value="<%= product.split(', ')[2] %>">
+        <br>
+        <input type="text" id="price" name="product[price]" value="<%= product.split(', ')[3] %>">
+        <br>
+        <input type="text" id="creator" name="product[creator]" value="<%= product.split(', ')[4] %>">
+        <br>
+        <button type='submit'>Edit</button>
+      </form>
+        <form action='/products/<%=product[0]%>' method='POST'>
+        <input type='hidden' name='_method' value='DELETE'>
+        <button type='submit'>Delete</button>
+      </form>
+  <% end %>
+      </td>
+  </tr>
+</table>
+</body>
+</html>
