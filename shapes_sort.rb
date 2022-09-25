@@ -1,7 +1,4 @@
 class Shape
-  def to_s
-    "#{self.class}"
-  end
   def <=>(shape)
     self.area <=> shape.area
   end
@@ -24,6 +21,7 @@ class Rectangle < Shape
     @a * @b
   end
 end
+
 class Triangle < Shape
   def initialize(a,h)
     @a = a
@@ -33,6 +31,7 @@ class Triangle < Shape
     @a * @h * 0.5
   end
 end
+
 class Circle < Shape
   def initialize(r)
     @r = r
@@ -41,6 +40,7 @@ class Circle < Shape
     @r * @r * Math::PI
   end
 end
+
 class CustomShape < Shape
   def initialize(area)
     @area = area
@@ -49,5 +49,6 @@ class CustomShape < Shape
     @area
   end
 end
+
 shapes = [Square.new(5), Rectangle.new(5,6), Triangle.new(5,8), Circle.new(4), CustomShape.new(24)]
 puts shapes.sort
